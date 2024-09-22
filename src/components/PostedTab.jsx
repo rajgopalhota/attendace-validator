@@ -119,18 +119,34 @@ const PostedTab = () => {
         notInTimeSheet,
         "Attendance Not In Time"
       );
-      const currentDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
-      XLSX.writeFile(inTimeWorkbook, `Attendance Posted In Time - ${currentDate}.xlsx`);
-      XLSX.writeFile(notInTimeWorkbook, `Attendance Posted Not In Time - ${currentDate}.xlsx`);
+      const currentDate = new Date()
+        .toLocaleDateString("en-GB")
+        .replace(/\//g, "-");
+      XLSX.writeFile(
+        inTimeWorkbook,
+        `Attendance Posted In Time - ${currentDate}.xlsx`
+      );
+      XLSX.writeFile(
+        notInTimeWorkbook,
+        `Attendance Posted Not In Time - ${currentDate}.xlsx`
+      );
     };
     reader.readAsArrayBuffer(file);
     return false;
   };
 
   return (
-    <Upload beforeUpload={handleFileUpload} showUploadList={false}>
-      <Button icon={<UploadOutlined />}>Upload CSV</Button>
-    </Upload>
+    <div className="flex flex-col gap-4 justify-center items-center">
+      {/* Title */}
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+        Upload Posted Attendance CSV
+      </h1>
+      <Upload beforeUpload={handleFileUpload} showUploadList={false}>
+        <Button icon={<UploadOutlined />} size="large" className="font-semibold">
+          Upload CSV
+        </Button>
+      </Upload>
+    </div>
   );
 };
 

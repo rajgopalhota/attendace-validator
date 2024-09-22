@@ -70,17 +70,34 @@ const NotPostedTab = () => {
 
       const newWorkbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(newWorkbook, newSheet, "Not Posted Data");
-      const currentDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
-      XLSX.writeFile(newWorkbook, `Attendance Not Posted - ${currentDate}.xlsx`);
+      const currentDate = new Date()
+        .toLocaleDateString("en-GB")
+        .replace(/\//g, "-");
+      XLSX.writeFile(
+        newWorkbook,
+        `Attendance Not Posted - ${currentDate}.xlsx`
+      );
     };
     reader.readAsArrayBuffer(file);
     return false;
   };
 
   return (
-    <Upload beforeUpload={handleFileUpload} showUploadList={false}>
-      <Button icon={<UploadOutlined />}>Upload CSV</Button>
-    </Upload>
+    <div className="flex flex-col gap-4 justify-center items-center">
+      {/* Title */}
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+        Upload Not Posted Attendance CSV
+      </h1>
+      <Upload beforeUpload={handleFileUpload} showUploadList={false}>
+        <Button
+          icon={<UploadOutlined />}
+          size="large"
+          className="font-semibold"
+        >
+          Upload CSV
+        </Button>
+      </Upload>
+    </div>
   );
 };
 
