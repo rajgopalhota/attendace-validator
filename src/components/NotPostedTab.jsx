@@ -53,18 +53,25 @@ const NotPostedTab = () => {
       json = json.map((row) => ({
         ...row,
         class_date: convertExcelDate(row.class_date),
-        posting_date_time: convertExcelDate(row.posting_date_time),
       }));
 
       // Filter rows based on 'hour_no'
       json = json.filter((row) => row.hour_no >= 1 && row.hour_no <= 11);
 
-      // Generate Excel file
       const newSheet = XLSX.utils.json_to_sheet(json);
+      const headers = Object.keys(json[0]).map((header) => {
+        return header
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (char) => char.toUpperCase());
+      });
+
+      // Add headers to the sheet
+      XLSX.utils.sheet_add_aoa(newSheet, [headers], { origin: "A1" });
+
       const newWorkbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(newWorkbook, newSheet, "Not Posted Data");
-      XLSX.writeFile(newWorkbook, "Not_posted_data.xlsx");
-      
+      const currentDate = new Date().toLocaleDateString('en-GB').replace(/\//g, '-');
+      XLSX.writeFile(newWorkbook, `Attendance Not Posted - ${currentDate}.xlsx`);
     };
     reader.readAsArrayBuffer(file);
     return false;
