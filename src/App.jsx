@@ -37,7 +37,7 @@ function App() {
                 className="w-2/4 h-auto mix-blend-multiply"
               />
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center z-10">
               <NotPostedTab />
             </div>
           </div>
@@ -59,7 +59,7 @@ function App() {
                 className="w-2/4 h-auto mix-blend-multiply"
               />
             </div>
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center z-10">
               <PostedTab />
             </div>
           </div>
@@ -68,7 +68,8 @@ function App() {
 
       {/* Footer Section */}
       <footer className="text-white py-4 text-center">
-        Made with <span className="text-red-500">❤️</span> by CSE Honors Dept.
+        Made with <span className="text-red-500">❤️</span> by KL Principal
+        Office.
       </footer>
     </div>
   );
