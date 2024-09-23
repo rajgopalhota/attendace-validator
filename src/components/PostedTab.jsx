@@ -73,6 +73,8 @@ const PostedTab = () => {
         ["15:40", "15:55"],
       ];
 
+      json = json.filter((row) => row.hour_no >= 1 && row.hour_no <= 11);
+
       json.forEach((row) => {
         const dateTime = row.posting_date_time;
         const time = dateTime.split(" ")[1];
@@ -85,7 +87,6 @@ const PostedTab = () => {
           notInTime.push(row);
         }
       });
-
       // Generate Excel files
       const formatHeaders = (data) => {
         const headers = Object.keys(data[0]).map((header) => {
