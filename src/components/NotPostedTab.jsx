@@ -8,7 +8,7 @@ const NotPostedTab = () => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: "raw" });
+      const workbook = XLSX.read(data, { type: "array" });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       let json = XLSX.utils.sheet_to_json(sheet);
 
@@ -85,7 +85,7 @@ const NotPostedTab = () => {
       <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         Upload Not Posted Attendance CSV
       </h1>
-      <Upload beforeUpload={handleFileUpload} showUploadList={false}>
+      <Upload beforeUpload={handleFileUpload} showUploadList={false} className="z-10">
         <Button
           icon={<UploadOutlined />}
           size="large"

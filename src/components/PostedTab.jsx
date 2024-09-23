@@ -137,7 +137,7 @@ const PostedTab = () => {
       <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         Upload Posted Attendance CSV
       </h1>
-      <Upload beforeUpload={handleFileUpload} showUploadList={false}>
+      <Upload beforeUpload={handleFileUpload} showUploadList={false} className="z-10">
         <Button
           icon={<UploadOutlined />}
           size="large"

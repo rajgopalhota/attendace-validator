@@ -37,7 +37,7 @@ function App() {
                 className="w-2/4 h-auto mix-blend-multiply"
               />
             </div>
-            <div className="flex justify-center items-center z-10">
+            <div className="flex justify-center items-center">
               <NotPostedTab />
             </div>
           </div>
@@ -59,7 +59,7 @@ function App() {
                 className="w-2/4 h-auto mix-blend-multiply"
               />
             </div>
-            <div className="flex justify-center items-center z-10">
+            <div className="flex justify-center items-center">
               <PostedTab />
             </div>
           </div>
