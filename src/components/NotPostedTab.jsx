@@ -1,6 +1,6 @@
-import React from "react";
-import { Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { Button, Upload } from "antd";
+import React from "react";
 import * as XLSX from "xlsx";
 
 const NotPostedTab = () => {
@@ -8,7 +8,7 @@ const NotPostedTab = () => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: "array" });
+      const workbook = XLSX.read(data, { type: "raw" });
       const sheet = workbook.Sheets[workbook.SheetNames[0]];
       let json = XLSX.utils.sheet_to_json(sheet);
 
@@ -45,9 +45,7 @@ const NotPostedTab = () => {
         const year = date.getUTCFullYear();
         const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
         const day = date.getUTCDate().toString().padStart(2, "0");
-        const hours = date.getUTCHours().toString().padStart(2, "0");
-        const minutes = date.getUTCMinutes().toString().padStart(2, "0");
-        return `${day}-${month}-${year} ${hours}:${minutes}`;
+        return `${day}-${month}-${year}`;
       };
 
       json = json.map((row) => ({
@@ -55,7 +53,6 @@ const NotPostedTab = () => {
         class_date: convertExcelDate(row.class_date),
       }));
 
-      // Filter rows based on 'hour_no'
       json = json.filter((row) => row.hour_no >= 1 && row.hour_no <= 11);
 
       const newSheet = XLSX.utils.json_to_sheet(json);
@@ -65,7 +62,6 @@ const NotPostedTab = () => {
           .replace(/\b\w/g, (char) => char.toUpperCase());
       });
 
-      // Add headers to the sheet
       XLSX.utils.sheet_add_aoa(newSheet, [headers], { origin: "A1" });
 
       const newWorkbook = XLSX.utils.book_new();
@@ -75,17 +71,18 @@ const NotPostedTab = () => {
         .replace(/\//g, "-");
       XLSX.writeFile(
         newWorkbook,
-        `Attendance Not Posted - ${currentDate}.xlsx`
+        `Attendance Not Posted Data.xlsx`
       );
     };
+
     reader.readAsArrayBuffer(file);
     return false;
   };
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center">
-      {/* Title */}
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+    <div className="flex flex-col gap-2 justify-center items-center">
+      <img src="/2.gif" className="mix-blend-multiply w-1/2" />
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
         Upload Not Posted Attendance CSV
       </h1>
       <Upload beforeUpload={handleFileUpload} showUploadList={false}>
